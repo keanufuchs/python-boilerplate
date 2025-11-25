@@ -1,3 +1,6 @@
+# Logs
+logs/*.log
+
 # Python
 __pycache__/
 *.py[cod]
@@ -37,21 +40,14 @@ env/
 .DS_Store
 Thumbs.db
 
-# Logs
-logs/
-*.log
-
 # Environment variables
 .env
 .env.local
 
-# Data (for current project, not template)
+# Data
 data/input/*
 data/output/*
 data/reports/*
 !data/input/.gitkeep
 !data/output/.gitkeep
 !data/reports/.gitkeep
-
-# Don't ignore the template directory
-!{{cookiecutter.project_slug}}/

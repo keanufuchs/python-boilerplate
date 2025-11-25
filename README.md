@@ -1,86 +1,65 @@
-# Python Boilerplate
+# Python Boilerplate Template
 
-## Overview
+A cookiecutter template for Python projects with a modular architecture, configuration management, logging utilities, and CLI interface.
 
-This is a Python boilerplate project that provides a well-structured foundation for building Python applications. It includes a modular architecture with configuration management, logging utilities, and a CLI interface using Click.
+## Quick Start
 
-### Requirements
+### Using Cookiecutter (Recommended)
 
-* Python 3.10+
-* Poetry or Pip for dependency installation
-
-Tested with:
-* Python 3.12.8
-
-### Setup
-
-Clone the repository and change to directory.
-
-   ```bash
-   git clone <your-repo-url>
-   cd python-boilerplate
-   ```
-
-(Recommended) Use a Python virtual environment. Pyenv example:
-
-  ```bash
-  pyenv virtualenv 3.12.8 python-boilerplate
-  pyenv local python-boilerplate
-  pyenv activate python-boilerplate
-  ```
-
-#### Poetry
-
-Install dependencies via Poetry.
-
-   ```bash
-   poetry install
-   ```
-
-#### Pip
-
-Install dependencies via Pip.
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Configuration
-
-#### Application Configuration
-
-All application-related configurations are handled through the `app/config/config.yml` file. This file uses Pydantic for configuration management and supports:
-
-- Environment variables via `.env` files
-- YAML-based configuration
-- Type validation and settings
-
-#### Logging Configuration
-
-All configuration related to logging is set in `app/config/logging.json`. The application supports:
-
-- **VERBOSE**: When set to `True` in `config.yml`, all `DEBUG` logs will be sent to the console. If set to `False`, only `INFO` and higher levels will be shown.
-
-```yaml
-VERBOSE: True # Set to False for higher log levels (INFO and above)
-```
-
-Refer to [Python Logging Cookbook](https://docs.python.org/3/howto/logging-cookbook.html#custom-handling-of-levels) for more information on customizing logging behavior.
-
-### Execution
-
-Run the application using the CLI:
+Install cookiecutter:
 
 ```bash
-python main.py app-test
+pip install cookiecutter
 ```
 
-This will execute the test command defined in the CLI module.
+Create a new project:
 
-### Project Structure
+```bash
+cookiecutter gh:keanufuchs/python-boilerplate
+# Or locally:
+cookiecutter path/to/python-boilerplate
+```
+
+You'll be prompted to enter:
+- **project_name**: Your project's display name
+- **project_slug**: Directory name (auto-generated from project_name)
+- **project_short_description**: Brief description of your project
+- **author_name**: Your name
+- **author_email**: Your email address
+- **python_version**: Python version to use (default: 3.10)
+- **use_poetry**: Whether to use Poetry for dependencies (yes/no)
+- **verbose_logging**: Enable verbose logging by default (True/False)
+
+### Using the Setup Script (Alternative)
+
+If you prefer not to use cookiecutter, run the included setup script:
+
+```bash
+python create_project.py
+```
+
+This will guide you through an interactive setup and create a new project directory.
+
+---
+
+## Features
+
+The generated project includes:
+
+- **Modular Architecture**: Clean separation of concerns with organized modules
+- **Configuration Management**: Pydantic-based configuration with YAML support
+- **Logging**: Comprehensive logging with JSON-based configuration and rotating file handlers
+- **CLI Interface**: Click-based command-line interface for easy command creation
+- **Type Safety**: Type hints and Pydantic validation throughout
+- **Data Directories**: Pre-configured input/output/reports/static directories
+- **Development Ready**: .gitignore, requirements.txt, and proper project structure
+
+## Project Structure
+
+The generated project will have this structure:
 
 ```
-python-boilerplate/
+your-project/
 ├── app/
 │   ├── __init__.py
 │   ├── app.py              # Main application logic
@@ -100,28 +79,42 @@ python-boilerplate/
 ├── logs/                   # Application logs
 ├── main.py                 # Application entry point
 ├── requirements.txt        # Python dependencies
-└── README.md
+├── .gitignore             # Git ignore rules
+└── README.md              # Project documentation
 ```
 
-### Features
+## After Project Creation
 
-- **Modular Architecture**: Clean separation of concerns with organized modules
-- **Configuration Management**: Pydantic-based configuration with YAML support
-- **Logging**: Comprehensive logging with JSON-based configuration
-- **CLI Interface**: Click-based command-line interface
-- **Type Safety**: Type hints and Pydantic validation
+Once your project is created:
 
-### Logs
+1. **Navigate to your project:**
+   ```bash
+   cd your-project-slug
+   ```
 
-Logs are automatically generated and stored in `logs/app.log`. Verbose logging can be controlled with the `VERBOSE` flag in the `config.yml`.
+2. **Create a virtual environment:**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
----
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   # Or with Poetry:
+   poetry install
+   ```
 
-## Development
+4. **Run the test command:**
+   ```bash
+   python main.py app-test
+   ```
 
-### Adding New Commands
+## Customizing Your Project
 
-To add new CLI commands, edit `app/cli.py`:
+### Adding New CLI Commands
+
+Edit `app/cli.py`:
 
 ```python
 @cli.command()
@@ -131,12 +124,40 @@ def your_command():
     logger.info('Command executed.')
 ```
 
-### Configuration
+### Adding Configuration Options
 
-Add new configuration options to `app/config/config.yml` and define them in the `BaseConfig` class in `app/config/config.py`:
+1. Add to `app/config/config.yml`:
+   ```yaml
+   YOUR_SETTING: "value"
+   ```
 
-```python
-class BaseConfig(BaseSettings):
-    # Add your configuration fields
-    YOUR_SETTING: str = "default_value"
-```
+2. Define in `app/config/config.py`:
+   ```python
+   class BaseConfig(BaseSettings):
+       YOUR_SETTING: str = "default_value"
+   ```
+
+### Customizing Logging
+
+Edit `app/config/logging.json` to:
+- Change log levels
+- Add new handlers
+- Customize formatters
+- Configure log rotation
+
+## Requirements
+
+- Python 3.10+
+- cookiecutter (for template usage)
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+This template is available under the MIT License. See LICENSE file for details.
+
+---
+
+**Made with ❤️ for rapid Python project setup**
