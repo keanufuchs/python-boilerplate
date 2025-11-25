@@ -1,0 +1,8 @@
+---
+# --------------------------
+# Logging Settings
+# --------------------------
+#
+# verbose - (optional) Set Debug Level to Verbose. Default: False
+#
+VERBOSE: False
