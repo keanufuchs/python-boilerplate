@@ -7,10 +7,9 @@
 ### Requirements
 
 * Python {{ cookiecutter.python_version }}+
-{% if cookiecutter.use_poetry == "yes" -%}
-* Poetry for dependency installation
-{% else -%}
 * Pip for dependency installation
+{% if cookiecutter.use_pyenv == "yes" -%}
+* pyenv (recommended for virtual environment management)
 {% endif %}
 
 ### Setup
@@ -22,31 +21,38 @@ git clone <your-repo-url>
 cd {{ cookiecutter.project_slug }}
 ```
 
-(Recommended) Use a Python virtual environment. Pyenv example:
+{% if cookiecutter.use_pyenv == "yes" -%}
+(Recommended) This project uses pyenv for Python version management. A `.python-version` file has been created with the virtualenv name `{{ cookiecutter.project_slug }}`.
+
+If you have pyenv installed, the virtualenv should already be created. Activate it:
 
 ```bash
-pyenv virtualenv {{ cookiecutter.python_version }} {{ cookiecutter.project_slug }}
-pyenv local {{ cookiecutter.project_slug }}
 pyenv activate {{ cookiecutter.project_slug }}
 ```
 
-{% if cookiecutter.use_poetry == "yes" -%}
-#### Poetry
-
-Install dependencies via Poetry.
+If not created, run:
 
 ```bash
-poetry install
+pyenv install {{ cookiecutter.python_version }}
+pyenv virtualenv {{ cookiecutter.python_version }} {{ cookiecutter.project_slug }}
+pyenv local {{ cookiecutter.project_slug }}
 ```
 {% else -%}
-#### Pip
+(Recommended) Use a Python virtual environment:
 
-Install dependencies via Pip.
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+{% endif %}
+
+#### Install dependencies
+
+Install dependencies via Pip:
 
 ```bash
 pip install -r requirements.txt
 ```
-{% endif %}
 
 ### Configuration
 

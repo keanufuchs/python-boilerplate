@@ -27,7 +27,7 @@ You'll be prompted to enter:
 - **author_name**: Your name
 - **author_email**: Your email address
 - **python_version**: Python version to use (default: 3.10)
-- **use_poetry**: Whether to use Poetry for dependencies (yes/no)
+- **use_pyenv**: Create a pyenv virtualenv? (yes/no)
 - **verbose_logging**: Enable verbose logging by default (True/False)
 
 ### Using the Setup Script (Alternative)
